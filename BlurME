@@ -1,3 +1,33 @@
-#!/usr/bin/env bash
-
-KWin=$()
+#!/bin/sh
+wm=$(echo $XDG_CURRENT_DESKTOP)
+wm1=$(echo $DESKTOP_SESSION)
+while sleep 1
+do if [ $wm = "KDE" ]; then
+    lswK=$(lsw | wc -l)
+    if [ "$lswK" == "2" ]; then
+      echo "Setting Non-Blurred Wallpaper"
+      bash ./wp
+    else
+      if [ "$lswK" == "1" ]; then
+        echo "Setting Non-Blurred Wallpaper"
+        bash ./wp
+      else 
+        echo "Setting Blurred Wallpaper"
+        bash ./wp_blur
+      fi
+    fi
+  else
+    if [ $wm1 = "/usr/share/xsessions/plasma" ]; then
+      lswK=$(lsw | wc -l)
+      if [ "$lswK" == "2" ]; then
+        echo "Setting Non-Blurred Wallpaper"
+        bash ./wp
+      else
+        echo "Setting Blurred Wallpaper"
+        bash ./wp_blur 
+      fi
+    else
+      echo "KWin is not the WM"
+    fi
+  fi 
+done
