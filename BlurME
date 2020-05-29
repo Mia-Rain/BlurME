@@ -17,7 +17,7 @@ if [ $XDG_CURRENT_DESKTOP = "KDE" ]; then
   else
     wid="2"
   fi
-  if [ "$lswK" == "$wid" ]; then
+  if [ "$lswK" -le "$wid" ]; then
     echo "Setting Non-Blurred Wallpaper"
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///$wp")}'
   else
@@ -37,7 +37,7 @@ else
     else 
       wid="2"
     fi
-    if [ "$lswK" == "$wid" ]; then
+    if [ "$lswK" -le "$wid" ]; then
       echo "Setting Non-Blurred Wallpaper"
       qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///$wp")}'
     else
