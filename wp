@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
     var allDesktops = desktops();
