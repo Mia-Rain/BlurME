@@ -27,7 +27,7 @@ do if [ $wm = "KDE" ]; then
         bash ./wp_blur 
       fi
     else
-      echo "KWin is not the WM"
+      bash ./SoWM.blur.sh
     fi
   fi 
 done
