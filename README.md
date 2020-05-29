@@ -25,3 +25,5 @@ for (i=0;i<Desktops.length;i++) {
 }'
 ```
 ~ ThatGeekyWeeb
+
+~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
