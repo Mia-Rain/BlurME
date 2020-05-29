@@ -1,33 +1,46 @@
 #!/bin/sh
 wm=$(echo $XDG_CURRENT_DESKTOP)
 wm1=$(echo $DESKTOP_SESSION)
+while getopts ":w:" c
+do
+  case "$c" in
+    w) wid=$OPTARG ;;
+  esac 
+done
 while sleep 1
-do if [ $wm = "KDE" ]; then
+do 
+if [ $wm = "KDE" ]; then
+  lswK=$(lsw | wc -l)
+  echo $lswK Windows/Widgets Are Open
+  if [ -n "$wid" ]; then
+    echo "Widget Amount is $wid"
+  else
+    wid="2"
+  fi
+  if [ "$lswK" == "$wid" ]; then
+    echo "Setting Non-Blurred Wallpaper"
+    bash ./wp
+  else
+    if [ "$lswK" == "1" ]; then
+      echo "Setting Non-Blurred Wallpaper"
+      bash ./wp
+    else 
+      echo "Setting Blurred Wallpaper"
+      bash ./wp_blur
+    fi
+  fi
+else
+  if [ $wm1 = "/usr/share/xsessions/plasma" ]; then
     lswK=$(lsw | wc -l)
     if [ "$lswK" == "2" ]; then
       echo "Setting Non-Blurred Wallpaper"
       bash ./wp
     else
-      if [ "$lswK" == "1" ]; then
-        echo "Setting Non-Blurred Wallpaper"
-        bash ./wp
-      else 
-        echo "Setting Blurred Wallpaper"
-        bash ./wp_blur
-      fi
+      echo "Setting Blurred Wallpaper"
+      bash ./wp_blur 
     fi
   else
-    if [ $wm1 = "/usr/share/xsessions/plasma" ]; then
-      lswK=$(lsw | wc -l)
-      if [ "$lswK" == "2" ]; then
-        echo "Setting Non-Blurred Wallpaper"
-        bash ./wp
-      else
-        echo "Setting Blurred Wallpaper"
-        bash ./wp_blur 
-      fi
-    else
-      bash ./SoWM.blur.sh
-    fi
-  fi 
+    bash ./SoWM.blur.sh
+  fi
+fi 
 done
