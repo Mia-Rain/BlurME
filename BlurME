@@ -1,6 +1,4 @@
 #!/bin/sh
-wm=$(echo $XDG_CURRENT_DESKTOP)
-wm1=$(echo $DESKTOP_SESSION)
 while getopts ":w:" c
 do
   case "$c" in
@@ -9,7 +7,7 @@ do
 done
 while sleep 1
 do 
-if [ $wm = "KDE" ]; then
+if [ $XDG_CURRENT_DESKTOP = "KDE" ]; then
   lswK=$(lsw | wc -l)
   echo $lswK Windows/Widgets Are Open
   if [ -n "$wid" ]; then
@@ -30,14 +28,24 @@ if [ $wm = "KDE" ]; then
     fi
   fi
 else
-  if [ $wm1 = "/usr/share/xsessions/plasma" ]; then
+  if [ $DESKTOP_SESSION = "/usr/share/xsessions/plasma" ]; then
     lswK=$(lsw | wc -l)
-    if [ "$lswK" == "2" ]; then
+    if [ -n "$wid" ]; then
+      echo "Widget Amount is $wid"
+    else 
+      wid="2"
+    fi
+    if [ "$lswK" == "$wid" ]; then
       echo "Setting Non-Blurred Wallpaper"
       bash ./wp
     else
-      echo "Setting Blurred Wallpaper"
-      bash ./wp_blur 
+      if [ "$lswK" == "1" ]; then
+        echo "Setting Non-Blurred Wallpaper"
+        bash ./wp_blur 
+      else 
+        echo "Setting Blurred Wallpaper"
+        bash ./wp
+      fi
     fi
   else
     bash ./SoWM.blur.sh
