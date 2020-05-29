@@ -27,6 +27,9 @@ for (i=0;i<Desktops.length;i++) {
 ~ ThatGeekyWeeb
 
 ~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
-\
-~ More Thx to the lads at the un-official r/unixporn discord server!
+
+
 ~ Thx To [@ianyl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
+
+
+~ More Thx to the lads at the un-official r/unixporn discord server!
