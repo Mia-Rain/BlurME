@@ -53,9 +53,12 @@ else
     wp="<>"
     wp_blurred="<>"
     while sleep 1
-    do if [ "$(lsw)" ]
-      then feh --bg-fill --no-fehbg "<$wp_blurred>"
-      else feh --bg-fill --no-fehbg "<$wp>"
+    do 
+    if [ -z "$(lsw)" ]
+      then 
+        feh --bg-fill --no-fehbg "<$wp_blurred>"
+      else 
+        feh --bg-fill --no-fehbg "<$wp>"
     fi 
   done
   fi
