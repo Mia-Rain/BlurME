@@ -11,25 +11,11 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 
 > *For suppor of another WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
 
->> Plasma wallpaper command
-```
-dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-var Desktops = desktops();                                                                                                                       
-for (i=0;i<Desktops.length;i++) {
-        d = Desktops[i];
-        d.wallpaperPlugin = "org.kde.image";
-        d.currentConfigGroup = Array("Wallpaper",
-                                                "org.kde.image",
-                                                                                    "General");
-        d.writeConfig("Image", "file:///<wallpaper>);
-}'
-```
+\
 ~ ThatGeekyWeeb
-
+\
 ~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
-
-
+\
 ~ Thx To [@ianyl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
-
-
+\
 ~ More Thx to the lads at the un-official r/unixporn discord server!
