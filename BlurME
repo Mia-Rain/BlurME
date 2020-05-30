@@ -1,6 +1,6 @@
 #!/bin/sh
-wp_blur="<>"
-wp="<>"
+wp="<wallpaper>"
+wp_blur="<wallpaper_blur>"
 while getopts ":w:" c
 do
   case "$c" in
@@ -9,7 +9,7 @@ do
 done
 while sleep 1
 do 
-if [ $XDG_CURRENT_DESKTOP = "KDE" ]; then
+if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
   lswK=$(lsw | wc -l)
   echo $lswK Windows/Widgets Are Open
   if [ -n "$wid" ]; then
@@ -18,19 +18,19 @@ if [ $XDG_CURRENT_DESKTOP = "KDE" ]; then
     wid="2"
   fi
   if [ "$lswK" -le "$wid" ]; then
-    echo "Setting Non-Blurred Wallpaper"
-    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp>")}'
+    echo "Setting Non-Blurred Wallpaper" && /usr/bin/qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'${wp}'")}'
+    echo "Set"
   else
     if [ "$lswK" = "1" ]; then
       echo "Setting Non-Blurred Wallpaper"
-      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp>")}'
+      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp}'")}'
     else 
       echo "Setting Blurred Wallpaper"
-      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp_blur>")}'
+      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'${wp_blur}'")}'
     fi
   fi
 else
-  if [ $DESKTOP_SESSION = "/usr/share/xsessions/plasma" ]; then
+  if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/plasma" ]; then
     lswK=$(lsw | wc -l)
     if [ -n "$wid" ]; then
       echo "Widget Amount is $wid"
@@ -39,26 +39,23 @@ else
     fi
     if [ "$lswK" -le "$wid" ]; then
       echo "Setting Non-Blurred Wallpaper"
-      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp>")}'
+      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'${wp}'")}'
     else
       if [ "$lswK" = "1" ]; then
         echo "Setting Non-Blurred Wallpaper"
-        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp_blur>")}'
+        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'${wp}'")}'
       else 
         echo "Setting Blurred Wallpaper"
-        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///<wp>")}'
+        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp_blur}'")}'
       fi
     fi
   else
-    wp="<>"
-    wp_blurred="<>"
+    wp="/home/thatgeekyweeb/Downloads/bqjps3cdq7t41_illustration_x4_colored_toned.png"
+    wp_blurred="/home/thatgeekyweeb/bin/blur.png"
     while sleep 1
-    do 
-    if [ -z "$(lsw)" ]
-      then 
-        feh --bg-fill --no-fehbg "<$wp_blurred>"
-      else 
-        feh --bg-fill --no-fehbg "<$wp>"
+    do if [ "$(lsw)" ]
+      then feh --bg-fill --no-fehbg "$wp_blurred"
+      else feh --bg-fill --no-fehbg "$wp"
     fi 
   done
   fi
