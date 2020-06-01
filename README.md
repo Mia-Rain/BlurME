@@ -43,5 +43,5 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 \
 ~ Many Thx to the lads at the un-official r/unixporn discord server!
 \
-~ This Code wouldn't be posslibe without everyone in the server or those mentioned above! Love Ya Dudes!
+~ This Code wouldn't be possilbe without everyone in the server or those mentioned above! Love Ya Dudes!
 
