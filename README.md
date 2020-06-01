@@ -41,6 +41,7 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 \
 ~ Thx To [@ianayl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
 \
+<!-- Wow You're Reading the code for my README! Shoutout to you dude! -->
 ~ Many Thx to the lads at the un-official r/unixporn discord server!
 \
 ~ This Code wouldn't be possible without everyone in the server or those mentioned above! Love Ya Dudes!
