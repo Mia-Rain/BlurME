@@ -18,7 +18,7 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 `It can automaticly Blur The Current` ***FEH*** `Wallpaper` 
 \
 `Users using a WM (Like KDE) will have to run (feh --bg-fill <wallpaper>) First (duh - also install feh)`
-\
+
 # Usage
 1. Edit `./BlurME` (Change `wp=` and `wp_blur=` to the correct files)
 2. Run `nohup ./BlurME -w <max-#-of-windows-before-blur> &` 
@@ -40,7 +40,6 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 ~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
 \
 ~ Thx To [@ianayl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
-\
 <!-- Wow You're Reading the code for my README! Shoutout to you dude! -->
 ~ Many Thx to the lads at the un-official r/unixporn discord server!
 \
