@@ -26,21 +26,21 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 
 > Most WM's set their Wallpaper via there settings service, normally this won't use *FEH*
 
-> Some WM *unsuporrted* include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Dynamic_window_managers) For a larger list. NOTE: Most of these Are Actually DE's. WM's are basiclly AIO's of DE's)
+> Some *unsuporrted* WM's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Overview) NOTE: Most of these Are Actually DE's. WM's are basiclly AIO's of DE's)
 
 `Automatic Blur with BlurME is soon to come, stay tunned!`
 
 > *BlurME is compatible with WM's, but only works with Plasma (Kwin) out of the box* 
 
-> *For suppor of another WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
+> *For support of another WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
 
 \
 ~ ThatGeekyWeeb
-\
+<!-- Wow You're Reading the code for my README! Shoutout to you dude! -->
 ~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
 \
 ~ Thx To [@ianayl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
-<!-- Wow You're Reading the code for my README! Shoutout to you dude! -->
+\
 ~ Many Thx to the lads at the un-official r/unixporn discord server!
 \
 ~ This Code wouldn't be possible without everyone in the server or those mentioned above! Love Ya Dudes!
