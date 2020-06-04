@@ -26,7 +26,7 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 
 # Usage
 1. Edit `./BlurME` (Change `wp=` and `wp_blur=` to the correct files)
-2. Run `nohup dash ./BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > &` 
+2. Run `dash ./BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > &` 
 
 > BlurME Works inside KDE and anywhere else that works with *FEH*
 
