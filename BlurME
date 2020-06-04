@@ -1,24 +1,45 @@
 #!/bin/sh
 ### Hey, Yeah, You! Your awesome! Keep being yourself, thanks a ton for using BlurME! BlurME is dedicated to You!
-wp="<>"
-wp_blur="<>"
-while getopts ":w:" c
+wall="$HOME/wallpaper2.png"
+wp_blur="./output.png"
+wp="$wall"
+while getopts ":w:b:c:" opt
 do
-  case "$c" in
-    w) wid=$OPTARG ;;
+  case "$opt" in
+    w ) wid=$OPTARG;;
+    b ) blur=$OPTARG;;
+    c ) wp=$OPTAGR;;
+
   esac 
 done
 while sleep 1
-do 
+do
+echo "$wp"
+echo Bluring with scale of "$blur"
+if [ -z "$wp" ]; then
+    echo "No wallpaper set"
+    echo echo "Use '-c'"
+    exit 1
+else
+    echo "Wallpaper is $wp"
+fi
+if [ "$blur" -ge "2" ]; then
+    convert "$wp" -blur 0x"$blur" ./output.png
+    wp_blur=./output.png
+else
+    echo "'-b' not used!?"
+    echo "Segfault"
+    exit 1
+fi
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-  lswK=$(lsw | wc -l)
-  echo "$lswK Windows/Widgets Are Open"
-  if [ -n "$wid" ]; then
-    echo "Widget Amount is $wid"
-  else
-    wid="2"
-  fi
-  if [ "$lswK" -le "$wid" ]; then
+    lswK=$(lsw | wc -l)
+    echo "$lswK Windows/Widgets Are Open"
+    if [ -n "$wid" ]; then
+        echo "Widget Amount is $wid"
+    else
+        wid="2"
+    fi
+if [ "$lswK" -le "$wid" ]; then
     echo "Setting Non-Blurred Wallpaper"
     qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp}'")}'
   else
@@ -40,18 +61,17 @@ else
     fi
     if [ "$lswK" -le "$wid" ]; then
       echo "Setting Non-Blurred Wallpaper"
-      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp}'")}'
+      qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wall}'")}'
     else
       if [ "$lswK" = "1" ]; then
         echo "Setting Non-Blurred Wallpaper"
-        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp}'")}'
+        qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wall}'")}'
       else 
         echo "Blurring"
         qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++) {d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file://'${wp_blur}'")}'
       fi
     fi
   else
-    wp="/home/thatgeekyweeb/Downloads/bqjps3cdq7t41_illustration_x4_colored_toned.png"
     while sleep 1
     lswK=$(lsw | wc -l)
     do
@@ -60,7 +80,7 @@ else
             echo "$lswK Windows are open"
             echo "Max number of windows is $wid"
             echo "Setting no blured wallpaper"
-            feh --bg-fill "$wp"
+            feh --bg-fill "$wall"
         else
             echo "Max window number is $wid"
             echo "current is $lswK"
