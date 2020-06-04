@@ -1,13 +1,3 @@
-***READ [AutoBlur.md](https://github.com/ThatGeekyWeeb/BlurME/blob/AutoBlur/AutoBlur.md)***
-\
-***This is a basic README***
-\
-***NOT PART OF THE AutoBlur BRANCH!***
-> Exists For Pull request!
-
-
-
-
 # BlurME
 A Simple scirpt that blurs the wallpaper when a window is open! Compatible with sowm and Plasma!
 \
