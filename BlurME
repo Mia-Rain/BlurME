@@ -8,23 +8,23 @@ do
   case "$opt" in
     w ) wid=$OPTARG;;
     b ) blur=$OPTARG;;
-    c ) wp=$OPTAGR;;
-
+    c ) wp=$OPTARG;;
   esac 
 done
 while sleep 1
 do
-echo "$wp"
 echo Bluring with scale of "$blur"
 if [ -z "$wp" ]; then
     echo "No wallpaper set"
-    echo echo "Use '-c'"
+    echo "Use '-c'"
     exit 1
 else
     echo "Wallpaper is $wp"
 fi
 if [ "$blur" -ge "2" ]; then
-    convert "$wp" -blur 0x"$blur" ./output.png
+    echo "Blurring, image with scale of $blur"
+    convert "$wp" -blur 0x$blur ./output.png
+    echo "Blurred!"
     wp_blur=./output.png
 else
     echo "'-b' not used!?"
