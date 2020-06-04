@@ -21,15 +21,13 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 
 # Usage
 1. Edit `./BlurME` (Change `wp=` and `wp_blur=` to the correct files)
-2. Run `nohup ./BlurME -w <max-#-of-windows-before-blur> &` 
+2. Run `nohup dash ./BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > &` 
 
 > BlurME Works inside KDE and anywhere else that works with *FEH*
 
 > Most WM's set their Wallpaper via there settings service, normally this won't use *FEH*
 
 > Some *unsuporrted* WM's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Overview) NOTE: Most of these Are Actually DE's. WM's are basiclly AIO's of DE's)
-
-`Automatic Blur with BlurME is soon to come, stay tunned!`
 
 > *BlurME is compatible with WM's, but only works with Plasma (Kwin) out of the box* 
 
