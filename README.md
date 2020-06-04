@@ -8,8 +8,10 @@ BlurME utilizes [lsw](https://tools.suckless.org/x/lsw/) to detect when windows 
 BlurME is compatible with any DE including those without *EWMH compliance* Such as [sowm](https://github.com/dylanaraps/sowm)
 #### Dependency's 
 [ImageMagick](dependency)
+\
 [lsw](https://tools.suckless.org/x/lsw/)
 > Active dbus (For Runit users!)
+
 `BlurME Works Without install~`\
 `But if u wish to run BlurME all the time, copy it to one of your path dirs` 
 \
