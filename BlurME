@@ -1,4 +1,5 @@
 #!/bin/sh
+### Hey, Yeah, You! Your awesome! Keep being yourself, thanks a ton for using BlurME! BlurME is dedicated to You!
 wp="<>"
 wp_blur="<>"
 while getopts ":w:" c
