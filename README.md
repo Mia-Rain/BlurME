@@ -16,14 +16,6 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 `But if u wish to run BlurME all the time, copy it to one of your path dirs` 
 \
 (```echo $PATH```)
-\
-`Currently BlurME requires a user to blur their own background`
-\
-`~ Check Out` [feh-blur](https://github.com/rstacruz/feh-blur-wallpaper/blob/master/feh-blur)
-`It can automaticly Blur The Current` ***FEH*** `Wallpaper` 
-\
-`Users using a WM (Like KDE) will have to run (feh --bg-fill <wallpaper>) First (duh - also install feh)`
-
 # Usage
 1. Edit `./BlurME` (Change `wp=` and `wp_blur=` to the correct files)
 2. Run `nohup ./BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > &` 
