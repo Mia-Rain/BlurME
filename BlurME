@@ -12,6 +12,15 @@ do
     o ) output=$OPTARG;;
   esac
 done
+KDEB () {
+    dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file:///'$wp_blur'");}'
+}
+KDEW () {
+    dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
+}
+
+trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
+
 while sleep 1
 do
 echo "$wp_blur"
@@ -35,7 +44,7 @@ if [ "$blur" -ge "2" ]; then
     echo "Blurred!"
 else
     echo "'-b' not used!?"
-    echo "Segfault"
+    echo "Segmeant Fault"
     exit 1
 fi
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
@@ -48,16 +57,16 @@ if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
     fi
 if [ "$lswK" -le "$wid" ]; then
     echo "Setting Non-Blurred Wallpaper"
-    dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
+    KDEW
 else
     if [ "$lswK" = "1" ]; then
         echo "Setting Non-Blurred Wallpaper"
-        dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
+        KDEW
     else 
       echo "Blurring"
       echo "$PWD"
       echo "$wp_blur"
-      dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file:///'$wp_blur'");}'
+      KDEB
     fi
   fi
 else
@@ -70,14 +79,14 @@ else
     fi
     if [ "$lswK" -le "$wid" ]; then
       echo "Setting Non-Blurred Wallpaper"
-      dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
+      KDEW
     else
       if [ "$lswK" = "1" ]; then
         echo "Setting Non-Blurred Wallpaper"
-        dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
+        KDEW
       else 
         echo "Blurring"
-        dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file:///'$wp_blur'");}'
+        KDEB
         echo "Blurred"
       fi
     fi
