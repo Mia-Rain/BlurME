@@ -37,7 +37,7 @@ else
     echo 'Wallpaper is '"$wp"
 fi
 if [ -z "$output" ]; then
-    output="$PWD///output.png"
+    output="$tmp/output.png"
 else
     echo 'saving to '"$output"
 fi
