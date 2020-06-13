@@ -1,8 +1,9 @@
 #!/bin/sh
 ### Hey, Yeah, You! Your awesome! Keep being yourself, thanks a ton for using BlurME! BlurME is dedicated to You!
-wp_blur="$PWD///output.png"
+wp_blur="$tmp/output.png"
 wp=""
 output=""
+tmp="/tmp"
 while getopts ":w:b:c:o:" opt
 do
   case "$opt" in
@@ -21,7 +22,7 @@ KDEW () {
 
 trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
 
-touch ./XDG_BLUR
+touch "$TMP"/XDG_BLUR
 echo "BlurME-Active" > ./XDG_BLUR
 
 while sleep 1
