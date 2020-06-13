@@ -21,6 +21,8 @@ KDEW () {
 
 trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
 
+export XDG_BLUR='BlurME-Active'
+
 while sleep 1
 do
 echo "$wp_blur"
