@@ -21,7 +21,8 @@ KDEW () {
 
 trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
 
-export XDG_BLUR='BlurME-Active'
+touch ./XDG_BLUR
+echo "BlurME-Active" > ./XDG_BLUR
 
 while sleep 1
 do
