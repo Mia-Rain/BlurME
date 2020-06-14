@@ -1,5 +1,6 @@
 #!/bin/sh
 # BlurME is dedicated to You!
+wp_blur="$PWD///output.png" 
 while getopts ":w:b:c:o:" opt
 do
   case "$opt" in
