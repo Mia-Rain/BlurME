@@ -1,8 +1,5 @@
 #!/bin/sh
-### Hey, Yeah, You! Your awesome! Keep being yourself, thanks a ton for using BlurME! BlurME is dedicated to You!
-wp_blur="$PWD///output.png"
-wp=""
-output=""
+# BlurME is dedicated to You!
 while getopts ":w:b:c:o:" opt
 do
   case "$opt" in
@@ -26,7 +23,7 @@ echo "$wp_blur"
 echo 'Bluring with scale of '"$blur"
 if [ -z "$wp" ]; then
     echo "No wallpaper set"
-    echo "Use '-W'"
+    echo "Use '-c'"
     exit 1
 else
     echo 'Wallpaper is '"$wp"
