@@ -18,13 +18,13 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 \
 (```echo $PATH```)
 # Usage
-1. Run `nohup BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > -o &`
+1. Run `BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > -o <output to "" dir>`
 > EG: `BlurME -w 1 -c "$HOME/Pictures/wallpaper3.png" -b 12 -o "$HOME/pictures"`
 > `-w 1` Max Windows is 1, if 1 is open, wallpaper will blur.
 > `-c <>` sets `$wp` to users personall value 
 > `-b 12` Blurs with scale of `12` Can be `2-∞` Numbers above 20 my cause slowed blur.
 > `-o <>` sets output ($output)
->NOTE: ***ONLY USE A DIR HERE*** ***OUTPUT IS ALWAYS*** `$output/output.png` 
+>NOTE: ***ONLY USE A DIR HERE*** ***OUTPUT IS ALWAYS*** `"$output"/output.png` 
 
 BlurME Works inside KDE and anywhere else that works with *FEH*
 \
