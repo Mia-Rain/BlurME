@@ -31,6 +31,10 @@ else
 fi
 if [ -n "$output" ]; then
     echo 'saving to '"$output"
+    wp_blur="$output///output.png"
+else
+    wp_blur="$PWD///output.png"
+    output="$PWD"
 fi
 
 echo 'Blurring with scale of '"$blur"
