@@ -18,6 +18,11 @@ KDEW () {
 }
 trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
 
+if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
+    echo "ICEWM is not yet supported!"
+    exit 1
+fi
+
 while sleep 1
 do
 echo "$wp_blur"
