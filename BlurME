@@ -16,12 +16,25 @@ KDEB () {
 KDEW () {
     dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
 }
+icewm_wp () {
+while sleep 1
+lswK=$(wmctrl -l | wc -l) 
+# ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
+do
+	if [ "$lswK" -le "$wid" ]; then
+        	echo "$lswK Windows are open"
+           	echo "Max number of windows is $wid"
+            	echo "Setting non-blurred wallpaper"
+            	feh --bg-fill "$wp"
+        else
+            	echo "Max window number is $wid"
+            	echo "current is $lswK"
+            	echo "Bluring"
+            	feh --bg-fill "$wp_blur"
+	fi
+done
+}
 trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
-
-if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
-    echo "ICEWM is not yet supported!"
-    exit 1
-fi
 
 while sleep 1
 do
@@ -52,6 +65,9 @@ else
     echo "Segmeant Fault"
     exit 1
 fi
+if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
+	icewm_wp
+fi    
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
     lswK=$(lsw | wc -l)
     echo "$lswK Windows/Widgets Are Open"
