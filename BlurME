@@ -2,6 +2,13 @@
 # BlurME is nolonger posix compiant 'source' causes issues in posix shell
 # BlurME is dedicated to You!
 wp_blur="$PWD///output.png" 
+# config file source
+if [ -z "$XDG_CONFIG_HOME" ]; then
+    	source "$HOME/.config/Blur"
+else
+	source "$XDG_CONFIG_HOME/Blur"
+fi
+
 while getopts ":w:b:c:o:" opt
 do
   case "$opt" in
@@ -18,11 +25,6 @@ KDEW() {
     dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
 }
 # config file source
-if [ -z "$XDG_CONFIG_HOME" ]; then
-    	source "$HOME/.config/Blur"
-else
-	source "$XDG_CONFIG_HOME/Blur"
-fi
 icewm_wp() {
 while sleep 1
 lswK=$(wmctrl -l | wc -l) 
