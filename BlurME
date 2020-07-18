@@ -24,10 +24,9 @@ KDEB() {
 KDEW() {
     dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'$wp'");}'
 }
-# config file source
 icewm_wp() {
 while sleep 1
-lswK=$(wmctrl -l | wc -l) 
+lswK=$(wmctrl -l | grep "$(wmctrl -d | grep "\*" | cut -f1 -d" ")" | wc -l) 
 # ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
 do
 	if [ "$lswK" -le "$wid" ]; then
@@ -43,7 +42,11 @@ do
 	fi
 done
 }
-trap 'echo "SIGINT caught!"; KDEW; exit 1' INT TERM
+WPO() {
+    KDEW
+    feh --bg-fill "$wp"
+}
+trap 'echo "SIGINT caught!"; WPO; exit 1' INT TERM
 
 while sleep 1
 do
@@ -76,7 +79,10 @@ else
 fi
 if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
 	icewm_wp
-fi    
+fi
+if [ "$DESKTOP_SESSION" = /usr/sahre/xsessions/berry* ]; then
+    	icewm_wp
+fi
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
     lswK=$(lsw | wc -l)
     echo "$lswK Windows/Widgets Are Open"
