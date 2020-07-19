@@ -26,7 +26,7 @@ KDEW() {
 }
 icewm_wp() {
 while sleep 1
-lswK=$(wmctrl -l | grep "$(wmctrl -d | grep "\*" | cut -f1 -d" ")" | wc -l) 
+lswK=$(wmctrl -l | grep "  "$(wmctrl -d | grep "\*" | cut -f1 -d" ") | wc -l)
 # ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
 do
 	if [ "$lswK" -le "$wid" ]; then
@@ -80,7 +80,7 @@ fi
 if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
 	icewm_wp
 fi
-if [ "$DESKTOP_SESSION" = /usr/sahre/xsessions/berry* ]; then
+if [ "$DESKTOP_SESSION" = /usr/share/xsessions/berry* ]; then
     	icewm_wp
 fi
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
@@ -128,20 +128,20 @@ else
     fi
   else
     while sleep 1
-    lswK=$(lsw | wc -l)
+    lswK=$(wmctrl -l | grep "  "$(wmctrl -d | grep "\*" | cut -f1 -d" ") | wc -l)
+# ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
     do
-        if [ "$lswK" -le "$wid" ];
-        then
-            echo "$lswK Windows are open"
-            echo "Max number of windows is $wid"
-            echo "Setting no blured wallpaper"
-            feh --bg-fill "$wp"
+        if [ "$lswK" -le "$wid" ]; then
+                echo "$lswK Windows are open"
+                echo "Max number of windows is $wid"
+                echo "Setting non-blurred wallpaper"
+                feh --bg-fill "$wp"
         else
-            echo "Max window number is $wid"
-            echo "current is $lswK"
-            echo "Bluring"
-            feh --bg-fill "$wp_blur"
-        fi
+                echo "Max window number is $wid"
+                echo "current is $lswK"
+                echo "Bluring"
+                feh --bg-fill "$wp_blur"
+         fi
     done
   fi
 fi
