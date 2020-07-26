@@ -1,7 +1,7 @@
 # BlurME
 ![Alt Text](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif)
-A Simple scirpt that blurs the wallpaper when a window is open! Compatible with sowm and Plasma!
-BlurME utilizes [lsw](https://tools.suckless.org/x/lsw/) to detect when windows are open!
+A Simple scirpt that blurs the wallpaper when a window is open!
+BlurME utilizes [lsw](https://tools.suckless.org/x/lsw/) & [wmctrl](https://linux.die.net/man/1/wmctrl) to detect when windows are open!
 \
 BlurME is compatible with any DE including those that aren't *EWMH compliant*
 #### Dependency's 
