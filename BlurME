@@ -5,6 +5,26 @@
 # but can work anywhere `sh` exists, `getopt` is no longer requried
 # BlurME is dedicated to You!
 wp_blur="$PWD///output.png"
+get_ws () {
+while read -r ws status _; do
+    case $status in
+        '*') printf '%s\n' "$ws"
+    esac
+done <<EOF
+$(wmctrl -d)
+EOF
+}
+
+get_wids () {
+    current="$(get_ws)"
+    while read -r wid ws _; do
+        case $ws in
+            "$current") printf '%s' "$wid"
+        esac
+    done <<EOF
+$(wmctrl -l)
+EOF
+}
 KDEB() {
     dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file:///'"$wp_blur"'");}'
 }
@@ -13,17 +33,20 @@ KDEW() {
 }
 icewm_wp() {
 while sleep 1
-lswK=$(wmctrl -l | grep -c"  "$(wmctrl -d | grep "\*" | cut -f1 -d" "))
 # ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
 do
-	if [ "$lswK" -le "$wid" ]; then
-        	echo "$lswK Windows are open"
+	get_ws
+	wids="$(get_wids)"
+	wids=${#wids}
+	wids="$((wids / 10))"
+	if [ "$wids" -le "$wid" ]; then
+        	echo "$wids Windows are open"
            	echo "Max number of windows is $wid"
             	echo "Setting non-blurred wallpaper"
             	feh --bg-fill "$wp"
         else
             	echo "Max window number is $wid"
-            	echo "current is $lswK"
+            	echo "current is $wids"
             	echo "Bluring"
             	feh --bg-fill "$wp_blur"
 	fi
@@ -44,9 +67,14 @@ usage: ${0##*/} [-h|-b|-w|-c]
 EOF
 }
 root() {
+
 trap 'echo "SIGINT caught!"; WPO; exit 1' INT TERM
 while sleep 1
 do
+get_ws
+wids="$(get_wids)"
+wids=${#wids}
+wids="$((wids / 10))"
 echo "$wp_blur"
 echo 'Bluring with scale of '"$blur"
 if [ -z "$wp" ]; then
@@ -81,18 +109,17 @@ if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/berry*" ]; then
     	icewm_wp
 fi
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-    lswK=$(lsw | wc -l)
-    printf "%b Windows/Widgets Are Open" "$lswK"
+    printf "%b Windows/Widgets Are Open" "$wids"
     if [ -n "$wid" ]; then
         echo "Widget Amount is $wid"
     else
         wid="2"
     fi
-if [ "$lswK" -le "$wid" ]; then
+if [ "$wids" -le "$wid" ]; then
     echo "Setting Non-Blurred Wallpaper"
     KDEW
 else
-    if [ "$lswK" = "1" ]; then
+    if [ "$wids" = "1" ]; then
         echo "Setting Non-Blurred Wallpaper"
         KDEW
     else
@@ -103,42 +130,44 @@ else
     fi
   fi
 else
-  if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/plasma" ]; then
-    lswK=$(lsw | wc -l)
-    if [ -n "$wid" ]; then
-      echo "Widget Amount is $wid"
-    else
-      wid="2"
-    fi
-    if [ "$lswK" -le "$wid" ]; then
-      echo "Setting Non-Blurred Wallpaper"
-      KDEW
-    else
-      if [ "$lswK" = "1" ]; then
-        echo "Setting Non-Blurred Wallpaper"
-        KDEW
-      else
-        echo "Blurring"
-        KDEB
-        echo "Blurred"
-      fi
-    fi
-  else
+	if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/plasma" ]; then
+		if [ -n "$wid" ]; then
+			echo "Widget Amount is $wid"
+		else
+ 			wid="2"
+    		fi
+    		if [ "$wids" -le "$wid" ]; then
+      			echo "Setting Non-Blurred Wallpaper"
+      			KDEW
+    		else
+      			if [ "$wids" = "1" ]; then
+        				echo "Setting Non-Blurred Wallpaper"
+        				KDEW
+      			else
+        				prtinf "Blurring\n"
+        				KDEB
+        				printf "Blurred\n"
+      			fi
+    	fi
+else
     while sleep 1
-    lswK=$(wmctrl -l | grep -c "  "$(wmctrl -d | grep "\*" | cut -f1 -d" "))
 # ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
     do
-        if [ "$lswK" -le "$wid" ]; then
-                echo "$lswK Windows are open"
-                echo "Max number of windows is $wid"
-                echo "Setting non-blurred wallpaper"
-                feh --bg-fill "$wp"
-        else
-                echo "Max window number is $wid"
-                echo "current is $lswK"
-                echo "Bluring"
-                feh --bg-fill "$wp_blur"
-         fi
+	get_ws
+	wids="$(get_wids)"
+	wids=${#wids}
+	wids="$((wids / 10))"
+	if [ "$wids" -le "$wid" ]; then
+		echo "$wids Windows are open"
+                	echo "Max number of windows is $wid"
+                	echo "Setting non-blurred wallpaper"
+                	feh --bg-fill "$wp"
+        	else
+                	echo "Max window number is $wid"
+                	echo "current is $wids"
+                	echo "Bluring"
+                	feh --bg-fill "$wp_blur"
+         	fi
     done
   fi
 fi
