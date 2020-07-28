@@ -10,7 +10,7 @@ The following items have been replaced with pure sh alternatives
 | <ul><li>[x] **`grep -c`** |
 | <ul><li>[x] **`wc`** |
 | <ul><li>[x] **`getopt`** |
-
+***
 ![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif)
 
 A Simple scirpt that blurs the wallpaper when a window is open! Compatible with sowm and Plasma!
