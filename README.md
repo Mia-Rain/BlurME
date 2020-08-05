@@ -20,7 +20,7 @@ BlurME is compatible with any DE including those without *EWMH compliance* Such 
 #### Dependency's 
 [ImageMagick](dependency)
 \
-[lsw](https://tools.suckless.org/x/lsw/)
+[lsw](https://tools.suckless.org/x/lsw/) or `wmctrl` (lsw is required for KDE usage)
 > Active dbus (For Runit users!)
 
 `BlurME Works Without install~`\
