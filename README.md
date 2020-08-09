@@ -2,12 +2,12 @@
 ## Fade!
 `BlurME` now fades between transitions!
 
-Thanks to @mjkillough and`set-wallpaper`!
+Thanks to [@mjkillough](https://github.com/@mjkillough) and`set-wallpaper`!
 > [https://github.com/mjkillough/set-wallpaper](https://github.com/mjkillough/set-wallpaper)
 
-Fade is proved by KDE without any work, this change only effects WM's
+Fade is provided by KDE without any work, this change only effects WM's
 
-This branch is less portable the the `port` branch, use it for a truly portable & POSIX verision of BlurME
+This branch is less portable than the `port` branch, use it for a truly portable & POSIX verision of BlurME
 > https://github.com/ThatGeekyWeeb/BlurME/tree/port
 ***
 <!-- ![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif) -->
@@ -62,9 +62,3 @@ Most WM's set their Wallpaper via there settings service,
 ~ ThatGeekyWeeb
 <!-- Wow You're Reading the code for my README! Shoutout to you dude! -->
 ~ Huge Thanks to [@periish](https://github.com/periish/) for making the original BlurME script
-\
-~ Thx To [@ianayl](https://github.com/ianayl)(`qutebrowser shill#4345` ~ Discord) For *forcing* me to make BlurME *POSIX compliant*
-\
-~ Many Thx to the lads at the un-official r/unixporn discord server!
-\
-~ This Code wouldn't be possible without everyone in the server or those mentioned above! Love Ya Dudes!
