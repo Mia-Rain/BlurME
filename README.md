@@ -4,6 +4,11 @@
 
 Thanks to @mjkillough and`set-wallpaper`!
 > [https://github.com/mjkillough/set-wallpaper](https://github.com/mjkillough/set-wallpaper)
+
+Fade is proved by KDE without any work, this change only effects WM's
+
+This branch is less portable the the `port` branch, use it for a truly portable & POSIX verision of BlurME
+> https://github.com/ThatGeekyWeeb/BlurME/tree/port
 ***
 <!-- ![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif) -->
 
