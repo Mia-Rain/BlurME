@@ -1,54 +1,57 @@
 # BlurME
-## `POSIX`!
-`BlurME` has been completely rewritten!
+## Fade!
+`BlurME` now fades between transitions!
 
-Over the last few days I've been grinding down `BlurME` to make it as close to pure sh as possible!
-
-The following items have been replaced with pure sh alternatives 
-| Dependency Graph |
-|:-:|
-| <ul><li>[x] **`grep -c`** |
-| <ul><li>[x] **`wc`** |
-| <ul><li>[x] **`getopt`** |
+Thanks to @mjkillough and`set-wallpaper`!
+> [https://github.com/mjkillough/set-wallpaper](https://github.com/mjkillough/set-wallpaper)
 ***
-![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif)
+<!-- ![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif) -->
 
-A Simple scirpt that blurs the wallpaper when a window is open! Compatible with sowm and Plasma!
-BlurME utilizes [lsw](https://tools.suckless.org/x/lsw/) to detect when windows are open!
+A Simple script that blurs the wallpaper when a window is open! Compatible with `sowm` and Plasma!
+BlurME utilizes `wmctrl` to detect when windows are open!
 \
 BlurME is compatible with any DE including those without *EWMH compliance* Such as [sowm](https://github.com/dylanaraps/sowm)
-#### Dependency's 
-[ImageMagick](dependency)
-\
-[lsw](https://tools.suckless.org/x/lsw/)
-> Active dbus (For Runit users!)
 
-`BlurME Works Without install~`\
-`But if u wish to run BlurME all the time, copy it to one of your path dirs` 
+# Dependency's
+***
+[ImageMagick](www.imagemagick.org)
 \
-(```echo $PATH```)
+[wmctrl](https://linux.die.net/man/1/wmctrl)
+\
+[pip3](https://pypi.org/project/pip/) + (Python3)
+> NOTE: Fallback install does not work! `pip3` is required!
+
+>  `cairo`\
+>  `gdk-pixbuf`
+
+
+> Active dbus (For Runit users!)
+# Install
+```sh
+<clone>
+git submodule update --init
+cd set-wallpaper
+sudo python3 ./setup.py install
+```
 # Usage
 1. Run `BlurME -w <max-#-of-windows-before-blur> -c <wallpaper> -b <blur ammount > -o <output to "" dir>`
-> EG: `BlurME -w 1 -c "$HOME/Pictures/wallpaper3.png" -b 12 -o "$HOME/pictures"`
+> EG: `BlurME -w 2 --wallpaper "$HOME/Pictures/wallpaper3.png" -b 12 -o "$HOME/pictures"`
 ***
-> `-w 1` Max Windows is 1, if 1 is open, wallpaper will blur.
+> `-w 2` Max Windows is 2, if 2 + 1 (3) is open, wallpaper will blur.
 
-> `-c <>` sets `$wp` to users personall value 
+> `--wallpaper <>` sets `$wp` to users personall value
 
 > `-b 12` Blurs with scale of `12` Can be `2-∞` Numbers above 20 my cause slowed blur.
 
 > `-o <>` sets output ($output)
 
->NOTE: ***ONLY USE A DIR HERE*** ***OUTPUT IS ALWAYS*** `"$output"/output.png` 
+>NOTE: ***ONLY USE A DIR HERE*** ***OUTPUT IS ALWAYS*** `"$output"/output.png`
 
-BlurME Works inside KDE and anywhere else that works with *FEH*
+BlurME Works inside KDE and anywhere else that `set-wallpaper` works with
 \
-Most WM's set their Wallpaper via there settings service, normally this won't use *FEH*
-\
-Some *unsuporrted* WM's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Overview) NOTE: Most of these Are Actually DE's. WM's are basiclly AIO's of DE's)
-\
-*BlurME is compatible with WM's, but only works with Plasma (Kwin) out of the box* 
->*For support of another WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
+Most WM's set their Wallpaper via there settings service,
+
+>*For support of a WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
 
 \
 ~ ThatGeekyWeeb
@@ -60,5 +63,3 @@ Some *unsuporrted* WM's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many T
 ~ Many Thx to the lads at the un-official r/unixporn discord server!
 \
 ~ This Code wouldn't be possible without everyone in the server or those mentioned above! Love Ya Dudes!
-
-
