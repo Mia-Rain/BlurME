@@ -1,5 +1,5 @@
 #!/bin/bash
-# Port Branch
+# Fade Branch
 # ~ This script of BlurME is for fade transitions
 # BlurME is dedicated to You!
 wp_blur="$PWD///output.png"
@@ -29,27 +29,7 @@ KDEB() {
 KDEW() {
     dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:var Desktops = desktops();for (i=0;i<Desktops.length;i++) {d = Desktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper","org.kde.image","General");d.writeConfig("Image", "file://'"$wp"'");}'
 }
-icewm_wp() {
-while sleep 1
-# ICEWM and 'lsw' dont work together, 'wmctrl' works fine with it
-do
-	get_ws
-	wids="$(get_wids)"
-	wids=${#wids}
-	wids="$((wids / 10))"
-	if [ "$wids" -le "$wid" ]; then
-        	echo "$wids Windows are open"
-           	echo "Max number of windows is $wid"
-            	echo "Setting non-blurred wallpaper"
-            	set-wallpaper --fade-secs 1 --image "$wp"
-        else
-            	echo "Max window number is $wid"
-            	echo "current is $wids"
-            	echo "Bluring"
-            	set-wallpaper --fade-secs 1 --image "$wp_blur"
-	fi
-done
-}
+
 WPO() {
     KDEW
     set-wallpaper --fade-secs 1 --image "$wp"
@@ -92,24 +72,23 @@ fi
 
 echo 'Blurring with scale of '"$blur"
 if [ "$blur" -ge "2" ]; then
-    echo 'Blurring, image with scale of '"$blur"
-    convert "$wp" -blur 0x"$blur" "$output"/output.png
-    echo "Blurred!"
+    printf 'Blurring, image with scale of %b\n' "$blur"
+    if ! ls "$wp_blur"; then
+	    convert "$wp" -blur 0x"$blur" "$output"/output.png
+	    printf 'Blurred!\n'
+    else
+	    printf 'Blurred image found, skipping\n'
+    fi
 else
     echo "'-b' not used!?"
-    echo "Segmeant Fault"
+    printf 'Segmeant Fault\n'
     exit 1
 fi
-if [ "$XDG_CURRENT_DESKTOP" = "ICEWM" ]; then
-	icewm_wp
-fi
-if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/berry*" ]; then
-    	icewm_wp
-fi
+
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
     printf "%b Windows/Widgets Are Open" "$wids"
     if [ -n "$wid" ]; then
-        echo "Widget Amount is $wid"
+        printf 'Widget Amount is %b\n' "$wid"
     else
         wid="2"
     fi
@@ -157,13 +136,23 @@ else
 	if [ "$wids" -le "$wid" ]; then
 		echo "$wids Windows are open"
                 	echo "Max number of windows is $wid"
-                	echo "Setting non-blurred wallpaper"
-                	set-wallpaper --fade-secs 1 --image "$wp"
+		if [ "$type" != "un-blur" ]; then
+			set-wallpaper --fade-secs 1 --image "$wp"
+			echo "Setting non-blurred wallpaper"
+		else
+			printf 'Waiting\n' && sleep 1
+		fi
+		type="un-blur"
         	else
                 	echo "Max window number is $wid"
                 	echo "current is $wids"
-                	echo "Bluring"
-                	set-wallpaper --fade-secs 1 --image "$wp_blur"
+		if [ "$type" != "blur" ]; then
+			set-wallpaper --fade-secs 1 --image "$wp_blur"
+			echo "Bluring"
+		else
+			printf 'Waiting\n' && sleep 1
+		fi
+		type="blur"
          	fi
     done
   fi
