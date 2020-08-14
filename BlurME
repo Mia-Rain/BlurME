@@ -81,7 +81,7 @@ if [ -n "$output" ]; then
     fi
     wp_blur="$output///output.png"
 else
-    wp_blur="$output///output.png"
+    wp_blur="$PWD///output.png"
     output="$PWD"
 fi
 if [ "$V" = "1" ]; then
@@ -267,13 +267,12 @@ while [ "$1" ]; do
             command=$2
             shift 1
             ;;
-        --fade-en|-f)
+        --fade-en|-f|--fade)
             fade="1"
             shift 1
             ;;
         --fade-sec|-f-s)
-            fade_sec=$2
-            shift 1
+            fade_sec="1"
             ;;
         --verbose|-v)
             V="1"
