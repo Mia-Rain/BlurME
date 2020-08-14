@@ -45,6 +45,8 @@ usage: ${0##*/} [-h|-b|-w|-c]
 --fade-en/-f: Enables fade - overrides --command to "set-wallpaper"
 --fade_sec/-f-s: Set fade time "1-∞"
 --verbose/-v: Enables verbose output
+--blur-a/-b-a: Diables usage of "convert"
+--image/-i: Use with "--blur-a", sets blurred wallpaper location
 -h/--help: That print's this silly
 EOF
 }
@@ -219,7 +221,7 @@ else
 		type="un-blur"
         	else
                 if [ "$V" = "1" ]; then    
-                    printf "Max window number is %b\n"$wid"
+                    printf "Max window number is %b\n""$wid"
                     printf "current is %b\n""$wids"
                fi
 		if [ "$type" != "blur" ]; then
@@ -257,6 +259,10 @@ while [ "$1" ]; do
             wp=$2
             shift 1
             ;;
+        --image|-i)
+            wp_blur=$2
+            shift 1
+            ;;
         --command|--c)
             command=$2
             shift 1
@@ -272,7 +278,7 @@ while [ "$1" ]; do
         --verbose|-v)
             V="1"
             ;;
-        --blurA|-b-a)
+        --blur-a|-b-a)
             blurA="1"
             ;;
        -*)
