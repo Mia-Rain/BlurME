@@ -1,6 +1,6 @@
-#!/bin/bash
-# Fade Branch
-# ~ This script of BlurME is for fade transitions
+#!/bin/sh
+# Mod Branch
+# ~ This script of BlurME is for Modular plugins
 # BlurME is dedicated to You!
 wp_blur="$PWD///output.png"
 get_ws () {
@@ -32,98 +32,141 @@ KDEW() {
 
 WPO() {
     KDEW
-    set-wallpaper --fade-secs 1 --image "$wp"
+    $command "$wp"
 }
 usage () {
 cat << EOF
 ${0##*/}: Blurs the wallpaper!
 usage: ${0##*/} [-h|-b|-w|-c]
--w/--windows: Max window value
--b/--blur: Set blur strength
--c/--wallpaper: Sets wallpaper location
+-w/--windows: Max window value "1-∞"
+-b/--blur: Set blur strength "2-∞"
+-c/--wallpaper: Sets wallpaper location 
+--command/--c: Set wallpaper command - Defaults to "feh" - If not set
+--fade-en/-f: Enables fade - overrides --command to "set-wallpaper"
+--fade_sec/-f-s: Set fade time "1-∞"
+--verbose/-v: Enables verbose output
 -h/--help: That print's this silly
 EOF
 }
 root() {
 
-trap 'echo "SIGINT caught!"; WPO; exit 1' INT TERM
+trap 'prinf "SIGINT caught!\n"; WPO; exit 1' INT TERM
 while sleep 1
 do
 get_ws
 wids="$(get_wids)"
 wids=${#wids}
 wids="$((wids / 10))"
-echo "$wp_blur"
-echo 'Bluring with scale of '"$blur"
+if [ "$V" = "1" ]; then
+    printf '%b\n' "$wp_blur"
+fi
+if [ "$V" = "1" ]; then
+    printf 'Bluring with scale of %b'"$blur" '\n'
+fi
 if [ -z "$wp" ]; then
-    echo "No wallpaper set"
-    echo "Use '-c'"
-    exit 1
+    if [ "$V" = "1" ]; then
+        printf "No wallpaper set\n"
+    fi
+    usage && exit 1
 else
-    echo 'Wallpaper is '"$wp"
+    if [ "$V" = "1" ]; then
+        printf 'Wallpaper is %b\n'"$wp"
+    fi
 fi
 if [ -n "$output" ]; then
-    echo 'saving to '"$output"
+    if [ "$V" = "1" ]; then
+        printf 'saving to %b\n'"$output"
+    fi
     wp_blur="$output///output.png"
 else
-    wp_blur="$PWD///output.png"
+    wp_blur="$output///output.png"
     output="$PWD"
 fi
-
-echo 'Blurring with scale of '"$blur"
+if [ "$V" = "1" ]; then
+    printf 'Blurring with scale of %b\n'"$blur"
+fi
 if [ "$blur" -ge "2" ]; then
-    printf 'Blurring, image with scale of %b\n' "$blur"
+    if [ "$V" = "1" ]; then
+        printf 'Blurring, image with scale of %b\n' "$blur"
+    fi
     if ! ls "$wp_blur"; then
-	    convert "$wp" -blur 0x"$blur" "$output"/output.png
-	    printf 'Blurred!\n'
+	    if [ -z "$blurA" ]; then
+            convert "$wp" -blur 0x"$blur" "$output"/output.png
+        else
+            if [ "$V" = "1" ]; then
+                printf 'Disabled automatic blur\n'
+            fi
+        fi
+	    if [ "$V" = "1" ]; then
+            printf 'Blurred!\n'
+        fi
     else
-	    printf 'Blurred image found, skipping\n'
+        if [ "$V" = "1" ]; then
+	       printf 'Blurred image found, skipping\n'
+        fi
     fi
 else
-    echo "'-b' not used!?"
-    printf 'Segmeant Fault\n'
-    exit 1
+    if [ "$V" = "1" ]; then
+        printf "'-b' not used!?\n"
+        printf 'Segmeant Fault\n'
+    fi
+    usage && exit 1
 fi
 
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-    printf "%b Windows/Widgets Are Open" "$wids"
+    if [ "$V" = "1" ]; then
+        printf "%b Windows/Widgets Are Open" "$wids"
+    fi
     if [ -n "$wid" ]; then
-        printf 'Widget Amount is %b\n' "$wid"
+        if [ "$V" = "1" ]; then
+            printf 'Widget Amount is %b\n' "$wid"
+        fi
     else
         wid="2"
     fi
 if [ "$wids" -le "$wid" ]; then
-    echo "Setting Non-Blurred Wallpaper"
+    if [ "$V" = "1" ]; then
+        printf "Setting Non-Blurred Wallpaper\n"
+    fi
     KDEW
 else
     if [ "$wids" = "1" ]; then
-        echo "Setting Non-Blurred Wallpaper"
+        if [ "$V" = "1" ]; then
+            printf "Setting Non-Blurred Wallpaper\n"
+        fi    
         KDEW
     else
-      echo "Blurring"
-      echo "$PWD"
-      echo "$wp_blur"
       KDEB
     fi
   fi
 else
 	if [ "$DESKTOP_SESSION" = "/usr/share/xsessions/plasma" ]; then
 		if [ -n "$wid" ]; then
-			echo "Widget Amount is $wid"
+			if [ "$V" = "1" ]; then
+                printf 'Widget Amount is %b\n' "$wid"
+            fi
 		else
  			wid="2"
     		fi
     		if [ "$wids" -le "$wid" ]; then
-      			echo "Setting Non-Blurred Wallpaper"
-      			KDEW
+      			if [ "$V" = "1" ]; then
+                    printf "Setting Non-Blurred Wallpaper\n"
+      			fi
+                KDEW
     		else
       			if [ "$wids" = "1" ]; then
-        				echo "Setting Non-Blurred Wallpaper"
-        				KDEW
+        				if [ "$V" = "1" ]; then
+                            printf "Setting Non-Blurred Wallpaper\n"
+        				fi
+                        KDEW
       			else
-        				prtinf "Blurring\n"
-        				KDEB
-        				printf "Blurred\n"
+                        if [ "$V" = "1" ]; then
+        				    prtinf "Blurring\n"
+        				fi
+                        KDEB
+        				if [ "$V" = "1" ]; then
+                            printf "Blurred\n"
+                        fi
       			fi
     	fi
 else
@@ -133,24 +176,61 @@ else
 	wids="$(get_wids)"
 	wids=${#wids}
 	wids="$((wids / 10))"
+    if [ -z "$command" ]; then
+        if [ -z "$fade" ]; then
+            command="feh --bg-fill"
+            if [ "$V" = "1" ]; then
+                printf 'Using default (FEH)\n'
+            fi
+        else
+            command="set-wallpaper --fade-secs $fade_sec --image"
+            if [ "$V" = "1" ]; then
+                printf 'Fade was enabled using set-wallpaper\n'
+            fi
+        fi
+    fi
+    if [ "$command" = "set-wallpaper --fade-secs $fade_sec --image" ]; then
+        if [ -z "$fade_sec" ]; then
+            fade_sec="1"
+            if [ "$V" = "1" ]; then
+                printf 'Fade_sec="%b"\n' "$fade_sec"
+            fi
+        fi
+    fi    
 	if [ "$wids" -le "$wid" ]; then
-		echo "$wids Windows are open"
-                	echo "Max number of windows is $wid"
+		if [ "$V" = "1" ]; then
+            printf "%b Windows are open\n" "$wids"
+        fi
+            if [ "$V" = "1" ]; then
+                printf "Max number of windows is %b]n" "$wid"
+            fi
 		if [ "$type" != "un-blur" ]; then
-			set-wallpaper --fade-secs 1 --image "$wp"
-			echo "Setting non-blurred wallpaper"
+			$command "$wp"
+            if [ "$V" = "1" ]; then
+			     printf "Setting non-blurred wallpaper\n"
+            fi
 		else
-			printf 'Waiting\n' && sleep 1
+            if [ "$V" = "1" ]; then
+			     printf 'Waiting\n' && sleep 1
+            else
+                sleep 1
+            fi
 		fi
 		type="un-blur"
         	else
-                	echo "Max window number is $wid"
-                	echo "current is $wids"
+                if [ "$V" = "1" ]; then    
+                    printf "Max window number is %b\n"$wid"
+                    printf "current is %b\n""$wids"
+               fi
 		if [ "$type" != "blur" ]; then
-			set-wallpaper --fade-secs 1 --image "$wp_blur"
-			echo "Bluring"
+			$command "$wp_blur"
+            if [ "$V" = "1" ]; then
+                printf "Bluring"
+            fi
 		else
-			printf 'Waiting\n' && sleep 1
+            if [ "$V" = "1" ]; then
+			     printf 'Waiting\n' && sleep 1
+           fi
 		fi
 		type="blur"
          	fi
@@ -176,6 +256,27 @@ while [ "$1" ]; do
         -c|--wallpaper)
             wp=$2
             shift 1
+            ;;
+        --command|--c)
+            command=$2
+            shift 1
+            ;;
+        --fade-en|-f)
+            fade="1"
+            shift 1
+            ;;
+        --fade-sec|-f-s)
+            fade_sec=$2
+            shift 1
+            ;;
+        --verbose|-v)
+            V="1"
+            ;;
+        --blurA|-b-a)
+            blurA="1"
+            ;;
+       -*)
+            usage && exit 1
             ;;
         *)
             usage && exit 1
