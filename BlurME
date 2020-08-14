@@ -43,7 +43,7 @@ usage: ${0##*/} [-h|-b|-w|-c]
 -c/--wallpaper: Sets wallpaper location 
 --command/--c: Set wallpaper command - Defaults to "feh" - If not set
 --fade-en/-f: Enables fade - overrides --command to "set-wallpaper"
---fade_sec/-f-s: Set fade time "1-∞"
+--fade-sec/-f-s: Set fade time "1-∞"
 --verbose/-v: Enables verbose output
 --blur-a/-b-a: Diables usage of "convert"
 --image/-i: Use with "--blur-a", sets blurred wallpaper location
@@ -280,9 +280,6 @@ while [ "$1" ]; do
             ;;
         --blur-a|-b-a)
             blurA="1"
-            ;;
-       -*)
-            usage && exit 1
             ;;
         *)
             usage && exit 1
