@@ -5,18 +5,17 @@
 Over the last few days I've been grinding down `BlurME` to make it as close to pure sh as possible!
 
 The following items have been replaced with pure sh alternatives 
-| Dependency Graph |
-|:-:|
-| <ul><li>[x] **`grep -c`** |
-| <ul><li>[x] **`wc`** |
-| <ul><li>[x] **`getopt`** |
-***
-![BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif)
 
-A Simple scirpt that blurs the wallpaper when a window is open! Compatible with sowm and Plasma!
-BlurME utilizes [lsw](https://tools.suckless.org/x/lsw/) to detect when windows are open!
-\
-BlurME is compatible with any DE including those without *EWMH compliance* Such as [sowm](https://github.com/dylanaraps/sowm)
+- [x] **`grep -c`**  
+- [x] **`wc`**  
+- [x] **`getopt`**  
+
+
+***
+<!--[BlurME-gif](https://github.com/ThatGeekyWeeb/files/blob/master/BlurME.gif)-->
+BlurME aims to have as few dependency's as possible, and being as close to pure POSIX `sh` as posible! 
+
+BlurME is compatible with any DE including those without *EWMH compliance*!
 #### Dependency's 
 [ImageMagick](dependency)
 \
