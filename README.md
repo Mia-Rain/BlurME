@@ -44,10 +44,10 @@ BlurME Works inside KDE and anywhere else that works with *FEH*
 \
 Most WM's set their Wallpaper via there settings service, normally this won't use *FEH*
 \
-Some *unsuporrted* WM's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Overview) NOTE: Most of these Are Actually DE's. WM's are basiclly AIO's of DE's)
+Some *unsuporrted* DE's include Gnome, Enlightment, Xfce4, Mate, etc. (To Many To list Here) (Check this [list](https://wiki.archlinux.org/index.php/window_manager#Overview))
 \
-*BlurME is compatible with WM's, but only works with Plasma (Kwin) out of the box* 
->*For support of another WM, Open a issue, containing a command to change the Wallpaper of said WM Inside the terminal*
+*BlurME is compatible with DE's, but only works with Plasma (Kwin) out of the box* 
+>*For support of another DE, Open a issue, containing a command to change the Wallpaper of said DE Inside the terminal*
 
 \
 ~ ThatGeekyWeeb
